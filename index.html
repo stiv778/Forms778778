@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Привет Мир</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      margin: 0;
+    }
+    .card {
+      background: #ffffff;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: min(420px, 90vw);
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: 28px;
+      color: #2c3e50;
+    }
+    p {
+      margin: 0 0 20px;
+      color: #4a5568;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Привет Мир</h1>
+    <p>Введите любое сообщение в поле ниже:</p>
+    <label for="message">Сообщение</label>
+    <input id="message" type="text" name="message" placeholder="Например, здравствуйте!" aria-label="Поле ввода сообщения" />
+  </main>
+</body>
+</html>
