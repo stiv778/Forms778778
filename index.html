@@ -3,61 +3,385 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Привет Мир</title>
+  <title>Тест из JSON</title>
   <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #e0e7ff;
+      --text-main: #1f2937;
+      --muted: #6b7280;
+      --surface: #ffffff;
+      --border: #e5e7eb;
+      --danger: #dc2626;
+      --success: #16a34a;
+      --bg: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
       margin: 0;
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 32px 16px;
     }
-    .card {
-      background: #ffffff;
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--surface);
       padding: 32px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: min(420px, 90vw);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     }
+
     h1 {
-      margin: 0 0 16px;
-      font-size: 28px;
-      color: #2c3e50;
+      margin: 0 0 12px;
+      font-size: 32px;
+      letter-spacing: -0.02em;
     }
-    p {
-      margin: 0 0 20px;
-      color: #4a5568;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #2c3e50;
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
+
+    p.lead {
+      margin: 0 0 24px;
+      color: var(--muted);
       font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: #f8fafc;
+    }
+
+    label { font-weight: 600; display: block; margin-bottom: 8px; }
+
+    input[type="file"] {
+      width: 100%;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 160px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      resize: vertical;
+      outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    input[type="text"]:focus {
-      outline: none;
-      border-color: #6366f1;
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    button {
+      border: none;
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
+    }
+
+    button.secondary {
+      background: #eef2ff;
+      color: var(--primary);
+      box-shadow: none;
+      border: 1px solid #e0e7ff;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .status {
+      margin-top: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .status.error { color: var(--danger); }
+    .status.success { color: var(--success); }
+
+    .questions {
+      margin-top: 24px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .question {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .question-title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .points {
+      color: var(--muted);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .options {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .option-label {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .option-label:hover { border-color: var(--primary); }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .score {
+      font-weight: 700;
+      color: var(--primary);
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>Привет Мир</h1>
-    <p>Введите любое сообщение в поле ниже:</p>
-    <label for="message">Сообщение</label>
-    <input id="message" type="text" name="message" placeholder="Например, здравствуйте!" aria-label="Поле ввода сообщения" />
+  <main class="page">
+    <h1>Загрузка теста из JSON</h1>
+    <p class="lead">Загрузите файл или вставьте JSON, чтобы визуализировать вопросы и проверить ответы.</p>
+
+    <section class="grid">
+      <div class="panel">
+        <label for="fileInput">Выберите JSON-файл</label>
+        <input id="fileInput" type="file" accept="application/json" aria-label="Загрузить JSON файл" />
+        <div class="status" id="fileStatus">Ожидание загрузки файла.</div>
+      </div>
+
+      <div class="panel">
+        <label for="jsonInput">Вставьте JSON</label>
+        <textarea id="jsonInput" spellcheck="false" aria-label="Поле для вставки JSON"></textarea>
+        <div class="controls">
+          <button id="renderBtn" type="button">Отрисовать из поля</button>
+          <button id="sampleBtn" type="button" class="secondary">Вставить пример</button>
+        </div>
+        <div class="status" id="textStatus">Используйте кнопку, чтобы отрисовать тест из текста.</div>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button id="checkBtn" type="button" class="secondary">Проверить ответы</button>
+      <div id="score" class="score" aria-live="polite"></div>
+    </div>
+
+    <section id="questions" class="questions" aria-live="polite"></section>
   </main>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const jsonInput = document.getElementById('jsonInput');
+    const renderBtn = document.getElementById('renderBtn');
+    const sampleBtn = document.getElementById('sampleBtn');
+    const fileStatus = document.getElementById('fileStatus');
+    const textStatus = document.getElementById('textStatus');
+    const questionsEl = document.getElementById('questions');
+    const scoreEl = document.getElementById('score');
+    const checkBtn = document.getElementById('checkBtn');
+
+    const sampleJson = {
+      "questions": [
+        {
+          "id": "q-1",
+          "text": "She ____ to school every day.",
+          "options": [
+            { "id": "A", "text": "go" },
+            { "id": "B", "text": "goes" },
+            { "id": "C", "text": "is go" },
+            { "id": "D", "text": "going" }
+          ],
+          "correctOptionId": "B",
+          "points": 1
+        },
+        {
+          "id": "q-2",
+          "text": "Which planet is known as the Red Planet?",
+          "options": [
+            { "id": "A", "text": "Earth" },
+            { "id": "B", "text": "Venus" },
+            { "id": "C", "text": "Mars" },
+            { "id": "D", "text": "Jupiter" }
+          ],
+          "correctOptionId": "C",
+          "points": 2
+        }
+      ]
+    };
+
+    sampleBtn.addEventListener('click', () => {
+      jsonInput.value = JSON.stringify(sampleJson, null, 2);
+      textStatus.textContent = 'Пример добавлен. Нажмите «Отрисовать из поля», чтобы увидеть вопросы.';
+      textStatus.className = 'status';
+    });
+
+    renderBtn.addEventListener('click', () => {
+      try {
+        const parsed = JSON.parse(jsonInput.value);
+        renderQuestions(parsed);
+        textStatus.textContent = 'Тест успешно отрисован из текста.';
+        textStatus.className = 'status success';
+      } catch (error) {
+        textStatus.textContent = 'Не удалось разобрать JSON: ' + error.message;
+        textStatus.className = 'status error';
+      }
+    });
+
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(e.target?.result || '');
+          jsonInput.value = JSON.stringify(parsed, null, 2);
+          renderQuestions(parsed);
+          fileStatus.textContent = `Файл «${file.name}» успешно загружен и отрисован.`;
+          fileStatus.className = 'status success';
+        } catch (error) {
+          fileStatus.textContent = 'Ошибка чтения файла: ' + error.message;
+          fileStatus.className = 'status error';
+        }
+      };
+      reader.onerror = () => {
+        fileStatus.textContent = 'Не удалось прочитать файл.';
+        fileStatus.className = 'status error';
+      };
+      reader.readAsText(file);
+    });
+
+    checkBtn.addEventListener('click', () => {
+      const questions = Array.from(document.querySelectorAll('.question'));
+      if (!questions.length) {
+        scoreEl.textContent = 'Нет вопросов для проверки.';
+        return;
+      }
+
+      let total = 0;
+      let gained = 0;
+
+      questions.forEach((q) => {
+        const correct = q.dataset.correct;
+        const points = Number(q.dataset.points || 0);
+        total += points;
+        const selected = q.querySelector('input[type="radio"]:checked');
+        if (selected && selected.value === correct) {
+          gained += points;
+        }
+      });
+
+      scoreEl.textContent = `Ваш результат: ${gained} / ${total} баллов`;
+    });
+
+    function renderQuestions(data) {
+      if (!data || !Array.isArray(data.questions)) {
+        throw new Error('Ожидается объект с массивом questions.');
+      }
+
+      questionsEl.innerHTML = '';
+
+      data.questions.forEach((question, index) => {
+        if (!question?.id || !question?.text || !Array.isArray(question?.options)) {
+          throw new Error(`Вопрос №${index + 1} имеет неверную структуру.`);
+        }
+
+        const container = document.createElement('article');
+        container.className = 'question';
+        container.dataset.correct = question.correctOptionId || '';
+        container.dataset.points = question.points || 0;
+
+        const header = document.createElement('div');
+        header.className = 'question-header';
+
+        const title = document.createElement('div');
+        title.className = 'question-title';
+        title.textContent = `${index + 1}. ${question.text}`;
+
+        const points = document.createElement('div');
+        points.className = 'points';
+        points.textContent = question.points ? `${question.points} балл(ов)` : 'Без баллов';
+
+        header.appendChild(title);
+        header.appendChild(points);
+
+        const optionsWrapper = document.createElement('div');
+        optionsWrapper.className = 'options';
+
+        question.options.forEach((option) => {
+          const optionId = `${question.id}-${option.id}`;
+          const label = document.createElement('label');
+          label.className = 'option-label';
+          label.setAttribute('for', optionId);
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = question.id;
+          input.value = option.id;
+          input.id = optionId;
+
+          label.appendChild(input);
+          label.append(` ${option.id}. ${option.text}`);
+          optionsWrapper.appendChild(label);
+        });
+
+        container.appendChild(header);
+        container.appendChild(optionsWrapper);
+        questionsEl.appendChild(container);
+      });
+
+      scoreEl.textContent = '';
+    }
+
+    // Заполним пример по умолчанию для удобства
+    jsonInput.value = JSON.stringify(sampleJson, null, 2);
+  </script>
 </body>
 </html>
